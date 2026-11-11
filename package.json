@@ -1,0 +1,21 @@
+{
+  "name": "ai-viral-clip-generator",
+  "version": "1.1.0",
+  "private": false,
+  "description": "Open-source AI-assisted long-form video to vertical short clips platform",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "mime-types": "^2.1.35",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^11.0.5"
+  }
+}

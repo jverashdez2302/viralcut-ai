@@ -1,0 +1,11 @@
+services:
+  viralcut:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+    restart: unless-stopped
