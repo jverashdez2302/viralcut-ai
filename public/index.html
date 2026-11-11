@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <title>ViralCut AI — Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>ViralCut <b>AI</b></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav>
+        <a class="nav-item active" href="#studio"><span class="nav-icon">✦</span> Crear clips</a>
+        <a class="nav-item" href="#results"><span class="nav-icon">▤</span> Mis proyectos</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-card">
+          <div class="side-card-icon">✧</div>
+          <strong>Tu contenido, en movimiento.</strong>
+          <p>Convierte videos largos en historias que capturan la atención.</p>
+        </div>
+        <div class="version">OPEN SOURCE <span>·</span> v1.1.0</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark"><span></span><span></span><span></span></span> ViralCut <b>AI</b></div>
+        <div class="breadcrumb">Studio <span>/</span> <strong>Nuevo proyecto</strong></div>
+        <div class="top-actions">
+          <span class="status-pill"><i></i> Sistema disponible</span>
+          <button id="themeToggle" class="icon-button" title="Cambiar tema" aria-label="Cambiar tema">◐</button>
+        </div>
+      </header>
+
+      <section class="content" id="studio">
+        <div class="hero">
+          <div class="eyebrow"><span class="spark">✦</span> AI-POWERED VIDEO STUDIO</div>
+          <h1>De video largo a <span>momentos épicos.</span></h1>
+          <p class="hero-copy">Encuentra automáticamente los fragmentos más potentes de tu contenido y conviértelos en clips verticales listos para redes.</p>
+          <div class="hero-tags"><span>✦ Detección inteligente</span><span>▣ Formato 9:16</span><span>◉ Subtítulos dinámicos</span></div>
+        </div>
+
+        <section class="source-card panel">
+          <div class="section-heading">
+            <div><div class="step-label">PASO 01</div><h2>Agrega tu video</h2><p>Comienza con un enlace de YouTube o sube un archivo desde tu dispositivo.</p></div>
+            <div class="input-badge">MP4 · MOV · AVI · MKV</div>
+          </div>
+          <div class="source-tabs">
+            <button class="source-tab active" data-tab="upload"><span>⇧</span> Subir video</button>
+            <button class="source-tab" data-tab="youtube"><span>▷</span> Enlace de YouTube</button>
+          </div>
+          <div id="uploadPanel" class="tab-panel">
+            <label class="dropzone" id="dropzone" for="videoFile">
+              <input type="file" id="videoFile" accept="video/*,.avi,.mkv,.mov,.mp4,.webm" hidden>
+              <span class="upload-icon">↑</span>
+              <strong>Arrastra tu video aquí</strong>
+              <span class="muted">o <u>explora tus archivos</u></span>
+              <small>Videos de hasta el límite configurado en el servidor</small>
+              <span id="fileName" class="file-name"></span>
+              <video id="sourcePreview" class="source-preview hidden" controls playsinline></video>
+            </label>
+          </div>
+          <div id="youtubePanel" class="tab-panel hidden">
+            <label class="field-label" for="youtubeUrl">URL del video de YouTube</label>
+            <div class="url-input"><span>▷</span><input id="youtubeUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off"></div>
+            <label class="permission-check"><input type="checkbox" id="authorized"> <span>Confirmo que soy titular del contenido o tengo autorización para procesarlo.</span></label>
+            <p class="field-note">La importación requiere yt-dlp en el servidor y está sujeta a los permisos y condiciones de YouTube.</p>
+          </div>
+          <div class="source-footer">
+            <div class="privacy-note"><span>♢</span> Tus archivos se procesan en tu servidor.</div>
+            <button id="startBtn" class="primary-button" disabled>Analizar video <span>→</span></button>
+          </div>
+          <div id="uploadError" class="error-box hidden"></div>
+        </section>
+
+        <section id="processing" class="processing-card panel hidden">
+          <div class="processing-top"><div><div class="step-label">PROCESAMIENTO EN CURSO</div><h2 id="processingTitle">Analizando tu contenido...</h2><p id="processingMessage">Preparando el video.</p></div><div class="processing-percent" id="progressPercent">0%</div></div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <div class="processing-bottom"><span id="processingStatus">En cola</span><button id="cancelBtn" class="text-button">Cancelar proceso</button></div>
+        </section>
+
+        <section id="results" class="results-section hidden">
+          <div class="results-heading">
+            <div><div class="step-label">PASO 02 · RESULTADOS</div><h2>Tus momentos destacados</h2><p id="resultsSummary">La IA encontró estos momentos con potencial para redes.</p></div>
+            <button id="downloadAll" class="secondary-button">↓ Descargar todos</button>
+          </div>
+          <div class="results-toolbar"><span id="clipCount">0 clips generados</span><span class="sort-label">Ordenados por potencial</span></div>
+          <div id="clipsGrid" class="clips-grid"></div>
+        </section>
+
+        <footer class="footer"><span>ViralCut AI <b>·</b> Open-source video studio</span><span>Hecho para crear con intención ✦</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div id="editorModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="editor-dialog">
+      <div class="editor-header"><div><div class="step-label">AJUSTES DEL CLIP</div><h2 id="editorTitle">Editar clip</h2></div><button class="icon-button" id="closeEditor" aria-label="Cerrar">×</button></div>
+      <div class="editor-body">
+        <div class="editor-preview"><video id="editorVideo" controls playsinline></video><span class="preview-ratio">9:16 · VERTICAL</span></div>
+        <div class="editor-controls">
+          <label class="field-label">Título del clip<input id="editTitle" class="text-input" maxlength="120"></label>
+          <div class="time-grid"><label class="field-label">Inicio (segundos)<input id="editStart" class="text-input" type="number" min="0" step="0.1"></label><label class="field-label">Final (segundos)<input id="editEnd" class="text-input" type="number" min="3" step="0.1"></label></div>
+          <label class="toggle-row"><span><strong>Subtítulos animados</strong><small>Palabras sincronizadas con el audio</small></span><input type="checkbox" id="editSubtitles" checked></label>
+          <div class="voiceover-box">
+            <div class="voiceover-heading"><span>✧</span><strong>Voz en off con IA</strong><em>OPCIONAL</em></div>
+            <textarea id="voiceText" rows="3" placeholder="Escribe una introducción o narración opcional..."></textarea>
+            <div class="voice-options"><select id="voiceSelect"><option value="alloy">Alloy</option><option value="echo">Echo</option><option value="fable">Fable</option><option value="onyx">Onyx</option><option value="nova">Nova</option><option value="shimmer">Shimmer</option></select><select id="audioMode"><option value="mix">Mezclar con audio original</option><option value="replace">Reemplazar audio original</option></select></div>
+            <small>Requiere que el proveedor de IA tenga habilitada la generación de voz.</small>
+          </div>
+          <button id="saveClip" class="primary-button full-width">Guardar y volver a renderizar <span>→</span></button>
+          <div id="editorError" class="error-box hidden"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
